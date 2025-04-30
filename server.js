@@ -51,23 +51,3 @@ app.post('/add', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
-
-app.get("/category/:name", (req, res) => {
-  const category = req.params.name;
-  const movies = require("./movies.json");
-  const list = movies[category] || [];
-  res.render("index", { categories: [{ name: category, movies: list }] });
-});
-
-const existing = movies[category]?.find(m => m.title.toLowerCase() === title.toLowerCase());
-if (existing) {
-  return res.send("Movie already exists.");
-}
-
-try {
-  fs.writeFileSync("./movies.json", JSON.stringify(movies, null, 2));
-  res.redirect("/");
-} catch (err) {
-  console.error(err);
-  res.status(500).send("Error saving movie.");
-}
