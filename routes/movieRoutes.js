@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Movie = require("../models/Movie");
+const Movie = require("../models/movie");
 const slugify = require("slugify");
 
 // Home page: Display all movies
