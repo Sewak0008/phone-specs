@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-4">
+  <h1 class="text-3xl font-bold mb-4">Admin Panel</h1>
+  <a href="/add.html" class="bg-blue-600 text-white px-4 py-2 rounded mb-4 inline-block">Add New Movie</a>
+
+  <% if (movies.length === 0) { %>
+    <p>No movies available.</p>
+  <% } else { %>
+    <table class="table-auto w-full bg-white shadow rounded">
+      <thead>
+        <tr>
+          <th class="px-4 py-2">Title</th>
+          <th class="px-4 py-2">Category</th>
+          <th class="px-4 py-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% movies.forEach((movie, index) => { %>
+          <tr class="border-t">
+            <td class="px-4 py-2"><%= movie.title %></td>
+            <td class="px-4 py-2"><%= movie.category %></td>
+            <td class="px-4 py-2">
+              <form action="/delete/<%= index %>" method="POST" class="inline">
+                <button class="bg-red-500 text-white px-3 py-1 rounded">Delete</button>
+              </form>
+              <!-- Edit button can be added later -->
+            </td>
+            <td class="px-4 py-2">
+              <a href="/movie/<%= movie.title %>" class="bg-green-500 text-white px-3 py-1 rounded">View</a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</body>
+</html>

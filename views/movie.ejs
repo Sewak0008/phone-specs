@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= movie.title %></title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-6">
+  <div class="max-w-3xl mx-auto bg-white rounded shadow p-6">
+    <h1 class="text-3xl font-bold mb-4"><%= movie.title %></h1>
+    <img src="<%= movie.thumbnail %>" alt="Poster" class="w-full h-auto rounded mb-4" />
+    <p class="mb-4 text-gray-700"><%= movie.description %></p>
+
+    <h2 class="text-xl font-semibold mb-2">Available Prints</h2>
+    <ul class="list-disc pl-5">
+      <% movie.prints.forEach(print => { %>
+        <li>
+          <a href="<%= print.url %>" class="text-blue-600 underline" target="_blank">
+            <%= print.quality %>
+          </a>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+</body>
+</html>

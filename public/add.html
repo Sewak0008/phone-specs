@@ -2,17 +2,35 @@
 <html>
 <head>
   <title>Add Movie</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 p-6">
-  <div class="max-w-xl mx-auto bg-white p-6 rounded shadow">
-    <h1 class="text-2xl font-bold mb-4">Add Movie</h1>
+  <div class="max-w-xl mx-auto bg-white rounded shadow p-6">
+    <h1 class="text-2xl font-bold mb-4">Add New Movie</h1>
+
     <form action="/add" method="POST">
-      <input name="title" placeholder="Movie Title" class="w-full p-2 border rounded mb-3" required>
-      <input name="link" placeholder="Google Drive / Mega Link" class="w-full p-2 border rounded mb-3" required>
-      <input name="category" placeholder="Category (e.g. Bollywood)" class="w-full p-2 border rounded mb-3" required>
-      <input name="thumbnail" placeholder="Thumbnail Image URL" class="w-full p-2 border rounded mb-3" required>
-      <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Add Movie</button>
+      <label class="block mb-2 font-semibold">Title</label>
+      <input type="text" name="title" required class="w-full border p-2 rounded mb-4" />
+
+      <label class="block mb-2 font-semibold">Thumbnail URL</label>
+      <input type="text" name="thumbnail" required class="w-full border p-2 rounded mb-4" />
+
+      <label class="block mb-2 font-semibold">Description</label>
+      <textarea name="description" rows="3" class="w-full border p-2 rounded mb-4"></textarea>
+
+      <label class="block mb-2 font-semibold">Category</label>
+      <input type="text" name="category" required class="w-full border p-2 rounded mb-4" />
+
+      <label class="block mb-2 font-semibold">480p Link</label>
+      <input type="text" name="print480" class="w-full border p-2 rounded mb-4" />
+
+      <label class="block mb-2 font-semibold">720p Link</label>
+      <input type="text" name="print720" class="w-full border p-2 rounded mb-4" />
+
+      <label class="block mb-2 font-semibold">1080p Link</label>
+      <input type="text" name="print1080" class="w-full border p-2 rounded mb-4" />
+
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Add Movie</button>
     </form>
   </div>
 </body>
