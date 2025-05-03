@@ -32,11 +32,24 @@
           </li>
         </ul>
     
-        <form action="/search" method="GET" class="flex w-full sm:w-auto gap-2">
-          <input type="text" name="query" id="searchinput" placeholder="Search movie..." required
-            class="flex-1 px-4 py-2 border border-gray-300 rounded" />
-          <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Search</button>
-        </form>
+        <div class="w-full max-w-xl">
+          <form action="/search" method="GET" class="flex flex-col sm:flex-row gap-3">
+            <input
+              type="text"
+              name="query"
+              id="searchinput"
+              placeholder="Search movie..."
+              required
+              class="flex-grow px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+            <button
+              type="submit"
+              class="mt-2 sm:mt-0 sm:ml-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-md shadow hover:bg-blue-700 transition-colors duration-200 w-full sm:w-auto"
+            >
+              Search
+            </button>
+          </form>
+        </div>               
       </div>
     </nav>    
           
@@ -54,20 +67,31 @@
     </nav>
 
     <% for (let category in categories) { %>
-      <h2 class="text-2xl font-semibold mt-6 mb-2"><%= category %></h2>
-      <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <h2 class="text-2xl font-semibold mt-6 mb-3 text-white capitalize px-4"><%= category %></h2>
+    
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 px-4">
         <% categories[category].forEach(movie => { %>
-          <div class="movie-card bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
-            <img src="<%= movie.thumbnail %>" alt="<%= movie.title %>" class="w-full h-48 object-cover">
-            <div class="p-4">
-              <h3 class="movie-title text-lg font-bold text-white mb-2"><%= movie.title %></h3>
-              <a href="/movie/<%= encodeURIComponent(movie.title) %>" class="bg-yellow-500 text-black px-3 py-1 rounded hover:bg-yellow-600">View</a>
+          <div class="bg-gray-900 rounded-lg overflow-hidden shadow-md hover:shadow-lg relative">
+    
+            <!-- Movie Thumbnail -->
+            <img src="<%= movie.thumbnail %>" alt="<%= movie.title %>"
+                 class="w-full h-[270px] object-cover rounded-t-lg" />
+    
+            <!-- Card Content -->
+            <div class="p-3 text-white">
+              <p class="text-xs text-gray-400 mb-1"><%= category%></p>
+              <h3 class="text-sm font-semibold leading-snug mb-2 line-clamp-2">
+                <%= movie.title %>
+              </h3>
+              <a href="/movie/<%= encodeURIComponent(movie.title) %>"
+                 class="inline-block bg-yellow-500 text-black text-xs px-3 py-1 rounded hover:bg-yellow-600">
+                View
+              </a>
             </div>
-          </div>          
+          </div>
         <% }); %>
       </div>
-    <% } %>
-  </div>
+    <% } %>        
 
   <div class="flex justify-center mt-4 space-x-2">
     <a href="/movies?page=1" class="px-3 py-1 bg-blue-500 text-white rounded">1</a>
