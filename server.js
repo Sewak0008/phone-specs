@@ -48,6 +48,32 @@ function isAuthenticated(req, res, next) {
 }
 
 // Routes
+app.get('/search', async (req, res) => {
+  const query = (req.query.query || '').toLowerCase(); // Agar query missing ho toh '' le lo
+
+  try {
+    // movies.json file padho
+    const data = fs.readFileSync(path.join(__dirname, 'movies.json'));
+    const movies = JSON.parse(data); // JSON string ko JS array banao
+
+    // Filter karo search ke basis pe
+    const filtered = movies.filter(m => m.title.toLowerCase().includes(query));
+
+    // Categories bana ke index.ejs ko bhejna
+    const categories = {};
+    filtered.forEach(movie => {
+      if (!categories[movie.category]) categories[movie.category] = [];
+      categories[movie.category].push(movie);
+    });
+
+    res.render('index', { categories });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server Error');
+  }
+});
+
+
 app.get('/', (req, res) => {
   const movies = loadMovies().reverse(); // Latest movie first
   const categories = {};
