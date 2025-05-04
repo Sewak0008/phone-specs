@@ -47,6 +47,7 @@ function isAuthenticated(req, res, next) {
   res.redirect('/login.html');
 }
 
+
 // Routes
 app.get('/search', async (req, res) => {
   const query = (req.query.query || '').toLowerCase(); // Agar query missing ho toh '' le lo
@@ -84,22 +85,27 @@ app.get('/', (req, res) => {
   res.render('index', { latestMovies, categories: null });
 });
 
+// server.js me /movies route ko update karo
 app.get('/movies', (req, res) => {
   const page = parseInt(req.query.page) || 1;
-  const limit = 10;
+  const limit = 20; // ✅ 20 movies per page
   const skip = (page - 1) * limit;
 
-  const allMovies = loadMovies();
+  const allMovies = loadMovies().reverse(); // latest first
   const paginated = allMovies.slice(skip, skip + limit);
 
-  const categories = {};
-  paginated.forEach(movie => {
-    if (!categories[movie.category]) categories[movie.category] = [];
-    categories[movie.category].push(movie);
-  });
+  const categories = { All: paginated }; // Single category to simplify view
 
-  res.render('index', { categories, page });
+  const totalPages = Math.ceil(allMovies.length / limit); // ✅ for pagination
+
+  res.render('index', {
+    categories,
+    page,
+    totalPages,
+    latestMovies: null // homepage logic disable for pagination view
+  });
 });
+
 
 app.get('/category/:name', (req, res) => {
   const category = req.params.name;
@@ -179,6 +185,7 @@ app.post('/add', isAuthenticated, (req, res) => {
 
   res.redirect('/');
 });
+
 
 app.get('/delete/:id', (req, res) => {
   const movieId = req.params.id;
