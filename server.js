@@ -23,8 +23,8 @@ app.set('views', path.join(__dirname, 'views'));
 // Sample user data
 const users = [
   {
-    username: 'admin',
-    password: '$2b$10$Z19pMZHcPwaqtsWGG0Y0rein7e/W8Tcn7rbpsE/KYdF4eL27pGsbW' // Hash for "admin123"
+    username: 'depu',
+    password: '$2a$12$8TSa6BHsceWjnHY9XC/A7.Hb976ZLeXVMTr89IHN6hxt0/rhgN8RO' // Hash for "admin123"
   }
 ];
 
@@ -66,7 +66,10 @@ app.get('/search', async (req, res) => {
       categories[movie.category].push(movie);
     });
 
-    res.render('index', { categories });
+    res.render('index', {
+      categories,
+      latestMovies: null // ✅ Yeh zaroori hai error se bachne ke liye
+    });
   } catch (err) {
     console.error(err);
     res.status(500).send('Server Error');
@@ -75,15 +78,10 @@ app.get('/search', async (req, res) => {
 
 
 app.get('/', (req, res) => {
-  const movies = loadMovies().reverse(); // Latest movie first
-  const categories = {};
+  const movies = loadMovies().reverse(); // latest first
+  const latestMovies = movies.slice(0, 20); // latest 20 movies
 
-  movies.forEach(movie => {
-    if (!categories[movie.category]) categories[movie.category] = [];
-    categories[movie.category].push(movie);
-  });
-
-  res.render('index', { categories });
+  res.render('index', { latestMovies, categories: null });
 });
 
 app.get('/movies', (req, res) => {
@@ -105,14 +103,16 @@ app.get('/movies', (req, res) => {
 
 app.get('/category/:name', (req, res) => {
   const category = req.params.name;
-  const movies = loadMovies().reverse(); // Latest first
-
+  const movies = loadMovies().reverse();
   const filtered = movies.filter(movie => movie.category.toLowerCase() === category.toLowerCase());
 
   const categories = {};
   categories[category] = filtered;
 
-  res.render('index', { categories });
+  res.render('index', {
+    categories,
+    latestMovies: null // 🛠️ Yeh line zaroori hai
+  });
 });
 
 app.get('/movie/:title', (req, res) => {
@@ -179,6 +179,18 @@ app.post('/add', isAuthenticated, (req, res) => {
 
   res.redirect('/');
 });
+
+app.get('/delete/:id', (req, res) => {
+  const movieId = req.params.id;
+
+  let movies = loadMovies(); // movies.json se load karo
+  movies = movies.filter(m => m.id !== movieId); // jo id match kare use hatao
+
+  saveMovies(movies); // updated list save karo
+
+  res.redirect('/admin'); // admin page pe redirect karo
+});
+
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
