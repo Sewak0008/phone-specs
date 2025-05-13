@@ -105,11 +105,17 @@
                 <p class="text-xs text-gray-400 mb-1">Movie Library</p>
                 
                 <h3 class="text-sm font-semibold leading-snug mb-2 line-clamp-2"><%= movie.title %></h3>
-                <a href="/movie/<%= encodeURIComponent(movie.title) %>" class="inline-block bg-yellow-500 text-black text-xs px-3 py-1 rounded hover:bg-yellow-600">View</a>
+                <a href="/movie/<%= encodeURIComponent(movie.title) %>" class="inline-block bg-yellow-500 text-black text-xs px-3 py-1 rounded hover:bg-yellow-600">Download</a>
               </div>
             </div>
           <% }); %>
         </div>
+        <div class="flex justify-center mt-6">
+  <a href="/movies?page=2" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">
+    View More Movies
+  </a>
+</div>
+
       <% } else if (categories) { %>
         <% for (let category in categories) { %>
           <h2 class="text-2xl font-semibold mt-6 mb-3 text-white capitalize px-4"><%= category %></h2>
@@ -121,7 +127,7 @@
                 <div class="p-3 text-white">
                   <p class="text-xs text-gray-400 mb-1">Movie Library</p>                  
                   <h3 class="text-sm font-semibold leading-snug mb-2 line-clamp-2"><%= movie.title %></h3>
-                  <a href="/movie/<%= encodeURIComponent(movie.title) %>" class="inline-block bg-yellow-500 text-black text-xs px-3 py-1 rounded hover:bg-yellow-600">View</a>
+                  <a href="/movie/<%= encodeURIComponent(movie.title) %>" class="inline-block bg-yellow-500 text-black text-xs px-3 py-1 rounded hover:bg-yellow-600">Download</a>
                 </div>
               </div>
             <% }); %>
@@ -141,6 +147,10 @@
         <% } %>
       </div>
     <% } %>
+    <footer class="bg-gray-800 text-white text-center py-4 mt-12">
+  &copy; 2025 Movie Library. All rights reserved.
+</footer>
+
     
 
   <script>
