@@ -201,9 +201,16 @@ app.get('/admin', isAuthenticated, (req, res) => {
   res.render('admin', { phones });
 });
 
-app.get('/add', isAuthenticated, (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/add.html'));
+// Express app file (e.g. server.js ya routes/admin.js)
+app.post('/admin/add-phone', (req, res) => {
+  // Yaha aap phone ko DB me save karoge
+  const phoneData = req.body;
+  console.log(phoneData); // debug ke liye
+
+  // MongoDB insert ya local file write logic yaha likho
+  res.send("Phone added successfully!");
 });
+
 
 app.post('/add', isAuthenticated, (req, res) => {
   const { title, category, thumbnail, description, price, ram, storage, battery, display, chipset } = req.body;
