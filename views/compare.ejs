@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Compare Phones - Mobile Specs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-white font-sans">
+
+  <!-- Header -->
+  <header class="bg-gray-900 text-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center">
+      <h1 class="text-2xl font-bold tracking-wide">GSMArena Pro</h1>
+      <a href="/" class="text-yellow-400 hover:underline text-sm md:text-base">← Back to Home</a>
+    </div>
+  </header>
+
+  <!-- Main Comparison Section -->
+  <main class="max-w-7xl mx-auto px-4 py-10">
+    <% if (phones.length === 2) { %>
+      <h2 class="text-3xl font-bold text-center mb-10">Phone Comparison</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full table-auto bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+          <thead>
+            <tr class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white">
+              <th class="p-4 text-left">Feature</th>
+              <% phones.forEach(phone => { %>
+                <th class="p-4 text-left">
+                  <div class="flex flex-col items-start">
+                    <img src="<%= phone.thumbnail %>" alt="<%= phone.title %>" class="w-24 h-24 object-cover rounded mb-2">
+                    <span class="font-semibold text-lg"><%= phone.title %></span>
+                  </div>
+                </th>
+              <% }) %>
+            </tr>
+          </thead>
+          <tbody class="text-sm md:text-base">
+            <tr class="border-t border-gray-300 dark:border-gray-600">
+              <td class="p-4 font-medium">Processor</td>
+              <% phones.forEach(phone => { %><td class="p-4"><%= phone.specs.chipset %></td><% }) %>
+            </tr>
+            <tr class="bg-gray-50 dark:bg-gray-700 border-t">
+              <td class="p-4 font-medium">Display</td>
+              <% phones.forEach(phone => { %><td class="p-4"><%= phone.specs.display %></td><% }) %>
+            </tr>
+            <tr class="border-t">
+              <td class="p-4 font-medium">Battery</td>
+              <% phones.forEach(phone => { %><td class="p-4"><%= phone.specs.battery %></td><% }) %>
+            </tr>
+            <tr class="bg-gray-50 dark:bg-gray-700 border-t">
+              <td class="p-4 font-medium">Camera</td>
+              <% phones.forEach(phone => { %><td class="p-4"><%= phone.specs.camera %></td><% }) %>
+            </tr>
+            <tr class="border-t">
+              <td class="p-4 font-medium">RAM</td>
+              <% phones.forEach(phone => { %><td class="p-4"><%= phone.specs.ram %></td><% }) %>
+            </tr>
+            <tr class="bg-gray-50 dark:bg-gray-700 border-t">
+              <td class="p-4 font-medium">Storage</td>
+              <% phones.forEach(phone => { %><td class="p-4"><%= phone.specs.storage %></td><% }) %>
+            </tr>
+            <tr class="border-t">
+              <td class="p-4 font-medium">Operating System</td>
+              <% phones.forEach(phone => { %><td class="p-4"><%= phone.specs.os %></td><% }) %>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- CTA Section -->
+      <div class="text-center mt-10">
+        <a href="/" class="inline-block bg-yellow-400 text-black font-semibold py-3 px-6 rounded-full shadow hover:bg-yellow-300 transition">
+          Compare More Phones
+        </a>
+      </div>
+
+    <% } else { %>
+      <p class="text-center text-red-500 text-xl font-semibold">Error: Please select exactly 2 phones to compare.</p>
+      <div class="text-center mt-6">
+        <a href="/" class="text-blue-600 hover:underline">← Go Back & Select Phones</a>
+      </div>
+    <% } %>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white text-center py-6 mt-16">
+    <p>&copy; 2025 Mobile Specs. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
+

@@ -1,36 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Add Movie</title>
+  <title>Add New Phone</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 p-6">
   <div class="max-w-xl mx-auto bg-white rounded shadow p-6">
-    <h1 class="text-2xl font-bold mb-4">Add New Movie</h1>
+    <h1 class="text-2xl font-bold mb-6 text-center text-blue-700">Add New Phone</h1>
 
     <form action="/add" method="POST">
-      <label class="block mb-2 font-semibold">Title</label>
+      <!-- Basic Info -->
+      <label class="block mb-2 font-semibold">Phone Title</label>
       <input type="text" name="title" required class="w-full border p-2 rounded mb-4" />
 
-      <label class="block mb-2 font-semibold">Thumbnail URL</label>
+      <label class="block mb-2 font-semibold">Thumbnail Image URL</label>
       <input type="text" name="thumbnail" required class="w-full border p-2 rounded mb-4" />
 
       <label class="block mb-2 font-semibold">Description</label>
-      <textarea name="description" rows="3" class="w-full border p-2 rounded mb-4"></textarea>
+      <textarea name="description" rows="3" required class="w-full border p-2 rounded mb-4"></textarea>
 
-      <label class="block mb-2 font-semibold">Category</label>
-      <input type="text" name="category" required class="w-full border p-2 rounded mb-4" />
+      <label class="block mb-2 font-semibold">Category (e.g., Samsung, Xiaomi, Flagship)</label>
+      <input type="text" name="category" required class="w-full border p-2 rounded mb-6" />
 
-      <label class="block mb-2 font-semibold">480p Link</label>
-      <input type="text" name="print480" class="w-full border p-2 rounded mb-4" />
+      <!-- Specifications -->
+      <h2 class="text-xl font-semibold mb-4 text-gray-700">Phone Specifications</h2>
 
-      <label class="block mb-2 font-semibold">720p Link</label>
-      <input type="text" name="print720" class="w-full border p-2 rounded mb-4" />
+      <label class="block mb-2 font-semibold">Price</label>
+      <input type="text" name="price" required class="w-full border p-2 rounded mb-4" />
 
-      <label class="block mb-2 font-semibold">1080p Link</label>
-      <input type="text" name="print1080" class="w-full border p-2 rounded mb-4" />
+      <label class="block mb-2 font-semibold">RAM</label>
+      <input type="text" name="ram" required class="w-full border p-2 rounded mb-4" />
 
-      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Add Movie</button>
+      <label class="block mb-2 font-semibold">Storage</label>
+      <input type="text" name="storage" required class="w-full border p-2 rounded mb-4" />
+
+      <label class="block mb-2 font-semibold">Battery</label>
+      <input type="text" name="battery" required class="w-full border p-2 rounded mb-4" />
+
+      <label class="block mb-2 font-semibold">Display</label>
+      <input type="text" name="display" required class="w-full border p-2 rounded mb-4" />
+
+      <label class="block mb-2 font-semibold">Chipset</label>
+      <input type="text" name="chipset" required class="w-full border p-2 rounded mb-6" />
+
+      <!-- Submit Button -->
+      <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 rounded transition">
+        Add Phone
+      </button>
     </form>
   </div>
 </body>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= phone.title %> - Gallery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-4 sm:p-6 text-gray-800">
+
+  <div class="max-w-4xl mx-auto">
+    <!-- Heading -->
+    <h1 class="text-2xl sm:text-3xl font-bold mb-6 text-center"><%= phone.title %> - Gallery</h1>
+    
+    <!-- Phone Images -->
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-10 px-1 sm:px-0">
+  <% phone.images.forEach(img => { %>
+    <div class="w-full overflow-hidden rounded-lg shadow">
+      <img src="<%= img %>"
+           alt="Phone Image"
+           class="w-full h-auto max-h-56 object-contain mx-auto transition-transform duration-200 hover:scale-105">
+    </div>
+  <% }) %>
+</div>
+
+
+    <!-- 3D Model Viewer -->
+    <div class="mb-20 px-1 sm:px-0">
+      <h2 class="text-lg sm:text-xl font-semibold mb-3 text-center">3D Model</h2>
+      <div class="rounded-lg overflow-hidden shadow-lg">
+        <model-viewer 
+  src="<%= phone.model3d %>" 
+  alt="3D model of <%= phone.title %>"
+  auto-rotate 
+  camera-controls 
+  shadow-intensity="1"
+  class="w-full max-h-[500px] h-[220px] sm:h-[350px] md:h-[450px] lg:h-[500px] rounded-lg">
+</model-viewer>
+      </div>
+    </div>
+
+    <!-- Back Link -->
+    <div class="text-center mt-6">
+      <a href="/phone/<%= phone.title %>" class="text-blue-600 font-medium underline hover:text-blue-800">← Back to Phone Page</a>
+    </div>
+  </div>
+
+</body>
+</html>

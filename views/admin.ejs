@@ -1,42 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Admin Panel</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <title>Admin Panel - Add Phone</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 p-4">
-  <h1 class="text-3xl font-bold mb-4">Admin Panel</h1>
-  <a href="/add.html" class="bg-blue-600 text-white px-4 py-2 rounded mb-4 inline-block">Add New Movie</a>
+<body class="bg-gray-950 text-white">
 
-  <% if (movies.length === 0) { %>
-    <p>No movies available.</p>
-  <% } else { %>
-    <table class="table-auto w-full bg-white shadow rounded">
-      <thead>
-        <tr>
-          <th class="px-4 py-2">Title</th>
-          <th class="px-4 py-2">Category</th>
-          <th class="px-4 py-2">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% movies.forEach((movie, index) => { %>
-          <tr class="border-t">
-            <td class="px-4 py-2"><%= movie.title %></td>
-            <td class="px-4 py-2"><%= movie.category %></td>
-            <td class="px-4 py-2">
-              <form action="/delete/<%= index %>" method="POST" class="inline">
-                <button class="bg-red-500 text-white px-3 py-1 rounded">Delete</button>
-              </form>
-              <!-- Edit button can be added later -->
-            </td>
-            <td class="px-4 py-2">
-              <a href="/movie/<%= movie.title %>" class="bg-green-500 text-white px-3 py-1 rounded">View</a>
-            </td>
-          </tr>
-        <% }) %>
-      </tbody>
-    </table>
-  <% } %>
+  <div class="max-w-5xl mx-auto py-10 px-4">
+    <h1 class="text-3xl font-bold text-yellow-400 mb-6">📱 Add New Phone</h1>
+
+    <form action="/admin/add-phone" method="POST" class="space-y-6">
+      <!-- Basic Info -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input type="text" name="title" placeholder="Phone Title" class="input" required>
+        <input type="text" name="brand" placeholder="Brand" class="input" required>
+      </div>
+
+      <input type="text" name="thumbnail" placeholder="Thumbnail URL" class="input" required>
+      <textarea name="description" placeholder="Description" class="input" rows="2" required></textarea>
+
+      <!-- Images -->
+      <textarea name="images" placeholder="Image URLs (comma separated)" class="input" rows="2" required></textarea>
+
+      <!-- 3D Model -->
+      <input type="text" name="model3d" placeholder="3D Model URL (.glb)" class="input">
+
+      <!-- Specs -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input name="specs[NETWORK]" placeholder="Network" class="input">
+        <input name="specs[price]" placeholder="Price" class="input">
+        <input name="specs[lounch_date]" placeholder="Launch Date" class="input">
+        <input name="specs[chipset]" placeholder="Chipset" class="input">
+        <input name="specs[ram]" placeholder="RAM" class="input">
+        <input name="specs[storage]" placeholder="Storage" class="input">
+        <input name="specs[battery]" placeholder="Battery" class="input">
+        <input name="specs[display]" placeholder="Display Type" class="input">
+        <input name="specs[size]" placeholder="Display Size" class="input">
+        <input name="specs[resolution]" placeholder="Resolution" class="input">
+        <input name="specs[protection]" placeholder="Display Protection" class="input">
+        <input name="specs[os]" placeholder="Operating System" class="input">
+      </div>
+
+      <!-- Performance -->
+      <input name="cpu" placeholder="CPU" class="input">
+      <input name="gpu" placeholder="GPU" class="input">
+
+      <!-- Camera -->
+      <input name="triple" placeholder="Main Camera Specs" class="input">
+      <input name="feature" placeholder="Camera Features" class="input">
+      <input name="video" placeholder="Camera Video" class="input">
+      <input name="single" placeholder="Selfie Camera" class="input">
+      <input name="feture" placeholder="Selfie Feature" class="input">
+      <input name="videos" placeholder="Selfie Video" class="input">
+
+      <!-- Memory & Body -->
+      <input name="internal" placeholder="Internal Storage" class="input">
+      <input name="cardslot" placeholder="Card Slot" class="input">
+      <input name="dimensions" placeholder="Dimensions" class="input">
+      <input name="build" placeholder="Build" class="input">
+      <input name="sim" placeholder="SIM" class="input">
+      <input name="weight" placeholder="Weight" class="input">
+
+      <!-- Connectivity -->
+      <input name="wlan" placeholder="WLAN" class="input">
+      <input name="bluetooth" placeholder="Bluetooth" class="input">
+      <input name="postioning" placeholder="Positioning" class="input">
+      <input name="nfc" placeholder="NFC" class="input">
+      <input name="radio" placeholder="Radio" class="input">
+      <input name="usb" placeholder="USB" class="input">
+
+      <!-- Misc -->
+      <input name="color" placeholder="Color Options" class="input">
+      <input name="model" placeholder="Model Numbers" class="input">
+      <input name="sar" placeholder="SAR Value" class="input">
+      <input name="sensor" placeholder="Sensors" class="input">
+
+      <!-- Gaming -->
+      <input name="pubg_fps" placeholder="PUBG FPS" class="input">
+      <input name="genshin_fps" placeholder="Genshin Impact FPS" class="input">
+      <input name="performance" placeholder="Performance" class="input">
+
+      <!-- Charging -->
+      <input name="charging" placeholder="Charging Details" class="input">
+
+      <!-- Buy Link -->
+      <input name="buyLink" placeholder="Buy Link" class="input">
+
+      <!-- Rankings -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <input name="rankings[gaming]" placeholder="Gaming Rank" class="input">
+        <input name="rankings[camera]" placeholder="Camera Rank" class="input">
+        <input name="rankings[budget]" placeholder="Budget Rank" class="input">
+      </div>
+
+      <button type="submit" class="w-full bg-yellow-500 text-black font-bold py-3 rounded hover:bg-yellow-400 transition">Add Phone</button>
+    </form>
+  </div>
+
+  <style>
+    .input {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      background-color: #1f2937;
+      border: 1px solid #374151;
+      color: #f9fafb;
+    }
+    .input::placeholder {
+      color: #9ca3af;
+    }
+  </style>
+
 </body>
 </html>
+

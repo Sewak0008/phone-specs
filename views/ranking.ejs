@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title><%= category.toUpperCase() %> Phones</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+  <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+    
+    <!-- Title -->
+    <h1 class="text-3xl sm:text-4xl font-bold text-center mb-8">
+      Top 10 <%= category.charAt(0).toUpperCase() + category.slice(1) %> Smartphones
+    </h1>
+
+    <!-- Category Buttons -->
+    <div class="flex flex-wrap justify-center gap-4 mb-10">
+      <a href="/ranking?category=gaming" class="bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-4 py-2 rounded-full transition">🎮 Gaming</a>
+      <a href="/ranking?category=camera" class="bg-pink-400 hover:bg-pink-300 text-black font-semibold px-4 py-2 rounded-full transition">📷 Camera</a>
+      <a href="/ranking?category=budget" class="bg-green-400 hover:bg-green-300 text-black font-semibold px-4 py-2 rounded-full transition">🏅 Budget</a>
+    </div>
+
+    <!-- Phone Cards Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <% rankedPhones.forEach((phone, index) => { %>
+        <div class="relative bg-white p-5 rounded-xl shadow hover:shadow-lg transition duration-300">
+          
+          <!-- Ranking Badge -->
+          <div class="absolute top-2 left-2 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">
+            #<%= index + 1 %>
+          </div>
+
+          <!-- Phone Title -->
+          <h2 class="text-lg sm:text-xl font-semibold mb-3 text-center sm:text-left">
+            <%= phone.title %>
+          </h2>
+
+          <!-- Thumbnail -->
+          <% if (phone.thumbnail) { %>
+            <img src="<%= phone.thumbnail %>" alt="<%= phone.title %>" class="h-48 w-full object-contain mb-4" />
+          <% } %>
+
+          <!-- Specs -->
+          <p><strong>Price:</strong> <%= phone.specs?.price || phone.price || 'N/A' %></p>
+          <p><strong>Chipset:</strong> <%= phone.specs?.chipset || phone.chipset || 'N/A' %></p>
+
+          <% if (category === 'gaming' && phone.geekbench_multi) { %>
+            <p><strong>Geekbench Multi:</strong> <%= phone.geekbench_multi %></p>
+          <% } %>
+
+          <% if (category === 'camera' && phone.specs?.camera) { %>
+            <p><strong>Camera:</strong> <%= phone.specs.camera %></p>
+          <% } %>
+
+          <!-- View Full Specs Button -->
+          <a href="/phone/<%= encodeURIComponent(phone.title) %>" class="block mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold text-center py-2 rounded">
+            View Full Specs
+          </a>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+
+</body>
+</html>
+
+
